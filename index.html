@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080b0d">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Los últimos días | Historia interactiva</title>
 <style>
 :root{--red:#e5484d;--bg:#080b0d;--panel:#11171b;--muted:#a8b0b7;--white:#f4f6f7}
@@ -61,6 +63,13 @@ document.getElementById("start").addEventListener("click",()=>{show("start");win
 document.getElementById("restart").addEventListener("click",()=>{show("start");window.scrollTo(0,0)});
 document.getElementById("save").addEventListener("click",()=>{try{localStorage.setItem("losUltimosDiasSave",current);const b=document.getElementById("save");b.textContent="✓ Progreso guardado";setTimeout(()=>b.textContent="▣ Guardar progreso",1600)}catch(e){alert("No se pudo guardar en este navegador.")}});
 try{const saved=localStorage.getItem("losUltimosDiasSave");if(saved&&scenes[saved]){const b=document.createElement("button");b.className="secondary";b.style.width="100%";b.style.marginTop="10px";b.textContent="CONTINUAR PARTIDA GUARDADA";b.onclick=()=>show(saved);document.querySelector(".hero-content").appendChild(b)}}catch(e){}
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(console.error);
+  });
+}
 </script>
 </body>
 </html>
